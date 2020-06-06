@@ -64,8 +64,14 @@ def print_mimic(mimic_dict, start_word):
         - Randomly select a new word from the next-list
         - Repeat this process 200 times
     """
-    # +++your code here+++
-    pass
+    for _ in range(200):
+        print(start_word, end=" ")
+        next_values = mimic_dict.get(start_word) #.get so it could return none instead error if there is no value
+        if not next_values:
+            next_values = mimic_dict[""]
+        start_word = random.choice(next_values)
+
+
 
 
 # Provided main(), calls mimic_dict() and print_mimic()

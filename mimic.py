@@ -43,8 +43,17 @@ def create_mimic_dict(filename):
                 "who" : ["knows"]
             }
     """
-    # +++your code here+++
-    pass
+    mimic_dict = {} #starting with creating a new dict
+    previous_word = ""
+    with open(filename, "r") as source: #always use "with" method, so it could be closed automatically and use 2nd arg "r" to be deliberate on what we would lke to do (defaul is already "r")
+        words = source.read().split() #entire words as list
+    for word in words: #going through/looping
+        if previous_word not in mimic_dict: #if previous word is not a key already in mimic_dict
+            mimic_dict[previous_word] = [word] #then we would create a new key as a list then assign our word as a lit also in it as the value (could be multiple words). We need it to be as a list so we could also append in the next step
+        else:
+            mimic_dict[previous_word].append(word)
+        previous_word = word #next time through the loop to keep it running, to differentiate betwen actual previous word that still need to be converted vs the previous word that has been converted
+    return mimic_dict
 
 
 def print_mimic(mimic_dict, start_word):
